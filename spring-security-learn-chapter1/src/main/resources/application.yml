@@ -1,6 +1,11 @@
 server:
-  port: 9090
-
+  port: 8443
+  ssl:
+     key-store: /Users/macbook/develop/learn/spring-security/spring-security-learn/spring-security-learn-chapter1/src/main/resources/server.keystore
+     key-alias: tomcat
+     enabled: true
+     key-store-password: 123456
+     key-store-type: JKS
 spring:
   thymeleaf:
     cache: false
