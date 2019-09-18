@@ -15,6 +15,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/anon1", "/anon2").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").defaultSuccessUrl("/user").permitAll().and().logout().permitAll();
+
+		//只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面
+		http.sessionManagement().maximumSessions(1).expiredUrl("/login");
 		
 //		http.authorizeRequests().antMatchers("/anon1", "/anon2").permitAll().anyRequest().authenticated();
 	}
