@@ -9,5 +9,9 @@
         <div>
             这是用户页面
         </div>
+        <form th:action="@{/user1}" method="post">
+            <div><label> csrf test  </label></div>
+            <div><input type="submit" value="提交"/></div>
+        </form>
     </body>
 </html>

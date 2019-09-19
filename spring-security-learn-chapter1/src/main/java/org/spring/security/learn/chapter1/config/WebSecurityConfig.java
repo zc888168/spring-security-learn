@@ -21,34 +21,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/anon1", "/anon2").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").defaultSuccessUrl("/user").permitAll().and().logout().permitAll();
 
-		RequestMatcher requestMatcher = new RequestMatcher(){
-
-			/**
-			 * http://127.0.0.1:9090/user?token=abc 可以访问
-			 * http://127.0.0.1:9090/user  不能够访问
-			 * @param request
-			 * @return
-			 */
-			@Override
-			public boolean matches(HttpServletRequest request) {
-				if(!request.getRequestURI().contains("user1")){
-					return false;
-				}
-				/**
-				 * 拦截命令行伪造的请求
-				 */
-				if(StringUtils.isEmpty(request.getParameter("token"))){
-					return true;
-				}
-				if(request.getParameter("token").contains("/login")){
-					System.out.println("test success");
-					return false;
-				}
-				return false;
-			}
-		};
-		http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository())
-				.requireCsrfProtectionMatcher(requestMatcher);
+//		RequestMatcher requestMatcher = new RequestMatcher(){
+//
+//			/**
+//			 * http://127.0.0.1:9090/user?token=abc 可以访问
+//			 * http://127.0.0.1:9090/user  不能够访问
+//			 * @param request
+//			 * @return
+//			 */
+//			@Override
+//			public boolean matches(HttpServletRequest request) {
+//				if(!request.getRequestURI().contains("user1")){
+//					return false;
+//				}
+//				/**
+//				 * 拦截命令行伪造的请求
+//				 */
+//				if(StringUtils.isEmpty(request.getParameter("token"))){
+//					return true;
+//				}
+//				if(request.getParameter("token").contains("/login")){
+//					System.out.println("test success");
+//					return false;
+//				}
+//				return false;
+//			}
+//		};
+//		http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository())
+//				.requireCsrfProtectionMatcher(requestMatcher);
 
 	}
 

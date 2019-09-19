@@ -1,6 +1,7 @@
 package org.spring.security.learn.chapter1.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,11 +24,10 @@ public class TestController {
 	}
 	
 	@RequestMapping("/user")
-	@ResponseBody
 	public String user() {
 		return "user";
 	}
-	@RequestMapping("/user1")
+	@PostMapping("/user1")
 	@ResponseBody
 	public String user1() {
 		return "user1";
