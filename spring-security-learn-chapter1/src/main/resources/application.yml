@@ -4,3 +4,5 @@ server:
 spring:
   thymeleaf:
     cache: false
+  csrf:
+    enabled: true
