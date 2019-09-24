@@ -4,10 +4,15 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Learn </title>
+    <meta name="XSRF-TOKEN" content="${JSESSIONID}"/>
 </head>
 <body>
 <div>
-    <form th:action="@{/user1}" method="post">
+    <form action="http://127.0.0.1:9090/user1" method="post">
+        ${JSESSIONID}
+        <input type="hidden"
+               name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
         <input type="hidden"
                name="amount"
                value="100.00"/>
@@ -19,7 +24,13 @@
                value="evilsAccountNumber"/>
         <input type="submit"
                value="Win Money!"/>
+        <button onclick="getCookie()">cookie</button>
     </form>
 </div>
 </body>
+<script>
+    function getCookie() {
+        alert(document.cookie);
+    }
+</script>
 </html>
