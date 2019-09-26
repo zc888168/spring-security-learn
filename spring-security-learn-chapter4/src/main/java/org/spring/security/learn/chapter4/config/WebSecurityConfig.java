@@ -2,7 +2,7 @@ package org.spring.security.learn.chapter4.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.security.learn.chapter4.properties.SecurityConstants;
+import org.spring.security.learn.chapter4.constants.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,9 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-//
-//    @Autowired
-//    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
@@ -39,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.formLogin().loginPage("/login").successForwardUrl("/user").permitAll()
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/user").successForwardUrl("/user").permitAll()
                 .and().logout().permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler())
                 .deleteCookies("remember-me")

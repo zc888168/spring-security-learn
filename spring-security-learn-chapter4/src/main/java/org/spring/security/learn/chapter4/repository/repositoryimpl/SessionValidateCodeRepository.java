@@ -1,7 +1,7 @@
 package org.spring.security.learn.chapter4.repository.repositoryimpl;
 
 
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.constants.ValidateCodeType;
 import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.entity.ValidateCode;
 import org.springframework.stereotype.Component;

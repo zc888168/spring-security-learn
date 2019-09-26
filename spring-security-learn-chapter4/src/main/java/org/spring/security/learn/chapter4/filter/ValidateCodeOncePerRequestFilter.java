@@ -4,7 +4,7 @@ package org.spring.security.learn.chapter4.filter;
 import org.apache.commons.lang3.StringUtils;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.constants.ValidateCodeType;
 import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

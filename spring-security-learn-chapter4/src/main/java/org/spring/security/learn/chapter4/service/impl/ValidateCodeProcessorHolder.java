@@ -3,7 +3,7 @@ package org.spring.security.learn.chapter4.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.constants.ValidateCodeType;
 import org.spring.security.learn.chapter4.service.ValidateCodeProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

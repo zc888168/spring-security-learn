@@ -1,6 +1,6 @@
 package org.spring.security.learn.chapter4.repository;
 
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.constants.ValidateCodeType;
 import org.spring.security.learn.chapter4.entity.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 

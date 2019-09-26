@@ -1,7 +1,7 @@
-package org.spring.security.learn.chapter4.properties;
+package org.spring.security.learn.chapter4.constants;
 
 
-import org.spring.security.learn.chapter4.properties.SecurityConstants;
+import org.spring.security.learn.chapter4.constants.SecurityConstants;
 
 /**
  * Created on 2018/1/10.

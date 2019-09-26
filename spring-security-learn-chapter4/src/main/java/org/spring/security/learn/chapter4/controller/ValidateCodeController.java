@@ -2,7 +2,7 @@ package org.spring.security.learn.chapter4.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.security.learn.chapter4.properties.SecurityConstants;
+import org.spring.security.learn.chapter4.constants.SecurityConstants;
 import org.spring.security.learn.chapter4.service.ValidateCodeProcessor;
 import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
 import org.springframework.beans.factory.annotation.Autowired;

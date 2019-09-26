@@ -1,4 +1,4 @@
-package org.spring.security.learn.chapter4.properties;
+package org.spring.security.learn.chapter4.constants;
 
 /**
  * @author .
