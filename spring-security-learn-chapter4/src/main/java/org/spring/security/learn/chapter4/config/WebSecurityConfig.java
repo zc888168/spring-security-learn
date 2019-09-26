@@ -10,7 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll()
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler())
                 .deleteCookies("remember-me")
                 .and()
@@ -57,8 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new LogoutSuccessHandler() {
             @Override
             public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+                SecurityContext securityContext =  SecurityContextHolder.getContext();
+                if (null != securityContext){
+                    securityContext.setAuthentication(null);
+                }
                 logger.debug("你退出了登录");
-                httpServletResponse.sendRedirect("/login");
+                httpServletResponse.getWriter().write("lougout success");
+                //httpServletResponse.sendRedirect("/login");
             }
         };
     }
