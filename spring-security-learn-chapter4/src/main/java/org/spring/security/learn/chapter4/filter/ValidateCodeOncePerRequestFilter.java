@@ -9,6 +9,7 @@ import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -32,7 +33,7 @@ import java.util.Set;
  */
 
 @Component("validateCodeFilter")
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class ValidateCodeOncePerRequestFilter extends OncePerRequestFilter implements InitializingBean {
 
     /**
      * 验证码校验失败处理器
@@ -50,7 +51,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      * 验证请求url与配置的url是否匹配的工具类
      * 路径正则匹配工具
      */
-    private AntPathMatcher pathMatcher = new AntPathMatcher();
+    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
      * 系统中的校验码处理器
@@ -70,8 +71,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     public void afterPropertiesSet() throws ServletException {
         logger.info("*********afterPropertiesSet**********");
         super.afterPropertiesSet();
-
-        urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
+        //urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
         addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
         //TODO:还可以加图片的地址初始化
 
@@ -96,7 +96,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-        logger.info("*********ValidateCodeFilter-doFilterInternal**********");
+        logger.info("*********ValidateCodeOncePerRequestFilter-doFilterInternal**********");
 
         ValidateCodeType type = getValidateCodeType(httpServletRequest);
         if (type != null) {
@@ -124,11 +124,11 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
      */
     private ValidateCodeType getValidateCodeType(HttpServletRequest request) {
         ValidateCodeType result = null;
-        if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
-            Set<String> urls = urlMap.keySet();
-            for (String url : urls) {
-                if (pathMatcher.match(url, request.getRequestURI())) {
-                    result = urlMap.get(url);
+        if (!StringUtils.equalsIgnoreCase(request.getMethod(), HttpMethod.GET.name())) {
+            Set<String> neededVerifiedUrls = urlMap.keySet();
+            for (String neededVerifiedUrl : neededVerifiedUrls) {
+                if (antPathMatcher.match(neededVerifiedUrl, request.getRequestURI())) {
+                    result = urlMap.get(neededVerifiedUrl);
                 }
             }
         }

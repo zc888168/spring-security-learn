@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.authentication.SmsCodeAuthenticationToken;
 import org.spring.security.learn.chapter4.properties.SecurityConstants;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -37,7 +38,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
      * 一个路径匹配器  手机表单登录的一个请求
      */
     public SmsCodeAuthenticationFilter() {
-        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, "POST"));
+        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, HttpMethod.POST.name()));
 
     }
 
@@ -48,28 +49,22 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         logger.info("*********SmsCodeAuthenticationFilter--attemptAuthentication********");
-        if (postOnly && !request.getMethod().equals("POST")) {
+        if (postOnly && !request.getMethod().equals(HttpMethod.POST.name())) {
             //当前请求如果不是post请求则抛出异常
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
-        //从请求中获取mobile参数
         String mobile = obtainMobile(request);
-        logger.info("SmsCodeAuthenticationFilter-mobile:{}", mobile);
+        logger.debug("SmsCodeAuthenticationFilter 从请求中获取mobile:[{}]参数", mobile);
 
-        if (mobile == null) {
-            mobile = "";
-        }
+        mobile = null == mobile ? "" : mobile.trim();
 
-        mobile = mobile.trim();
-
-        //实例化token
+        logger.debug("实例化token mobile: [{}]", mobile);
         SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile);
 
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
 
-
-        //使用AuthenticationManager 调用 token
+        logger.debug("使用AuthenticationManager 调用 token ");
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 

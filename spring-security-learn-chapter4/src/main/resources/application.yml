@@ -5,4 +5,9 @@ my:
   security:
     code:
       sms:
-        length: 4
+        #验证码 长度6位
+        length: 6
+        #验证码 有效时间300s 5分钟
+        expireIn: 300
+        # 需要开启短信验证码的url
+        url: "/login/submit"

@@ -33,7 +33,7 @@ public class SmsCodeGenerator implements ValidateCodeGenerator {
 
 		logger.info("************SmsCodeGenerator-generate*************");
 		//这里采用随机数生成短信验证码
-		String code = RandomStringUtils.randomNumeric(securityProperties.getCode().getSms().getLength());
+		String code = RandomStringUtils.randomAlphanumeric(securityProperties.getCode().getSms().getLength());
 		return new ValidateCode(code, securityProperties.getCode().getSms().getExpireIn());
 	}
 	
