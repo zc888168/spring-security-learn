@@ -3,7 +3,6 @@ package org.spring.security.learn.chapter4.filter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
-import org.spring.security.learn.chapter4.properties.SecurityConstants;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
 import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
@@ -71,7 +70,6 @@ public class ValidateCodeOncePerRequestFilter extends OncePerRequestFilter imple
     public void afterPropertiesSet() throws ServletException {
         logger.info("*********afterPropertiesSet**********");
         super.afterPropertiesSet();
-        //urlMap.put(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
         addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
         //TODO:还可以加图片的地址初始化
 

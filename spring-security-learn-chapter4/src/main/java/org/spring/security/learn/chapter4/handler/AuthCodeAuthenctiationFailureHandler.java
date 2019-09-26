@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 
 @Component("authenctiationFailureHandler")
-public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class AuthCodeAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

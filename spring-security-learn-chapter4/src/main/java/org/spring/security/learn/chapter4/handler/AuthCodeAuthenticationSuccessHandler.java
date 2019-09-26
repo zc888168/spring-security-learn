@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author .
  */
 @Component("authenticationSuccessHandler")
-public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class AuthCodeAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
