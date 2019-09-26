@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.formLogin().loginPage("/login").successForwardUrl("/user").permitAll()
+        http.formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler())
                 .deleteCookies("remember-me")

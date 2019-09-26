@@ -34,8 +34,9 @@ public class AuthCodeAuthenctiationFailureHandler extends SimpleUrlAuthenticatio
 		//TODO:其它处理，比如返回给前端json信息
 
 		//httpServletRequest.getRequestDispatcher("/login").forward(httpServletRequest, httpServletResponse);
-		redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/login");
+		//redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/user");
 		//httpServletResponse.getWriter().write("login error login again");
+		httpServletResponse.sendRedirect("/user");
 
 	}
 

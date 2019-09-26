@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.authentication.SmsCodeAuthenticationToken;
 import org.spring.security.learn.chapter4.consts.SecurityConstants;
+import org.spring.security.learn.chapter4.exception.ValidateCodeException;
 import org.spring.security.learn.chapter4.service.impl.ValidateAuthCodeService;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -63,8 +64,10 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
             validateAuthCodeService.doFilterInternal(request, response);
         } catch (IOException e) {
             throw new AuthenticationServiceException("attemptAuthentication error", e);
-        } catch (ServletException e) {
-            throw new AuthenticationServiceException("attemptAuthentication error", e);
+        } catch (ServletException e2) {
+            throw new AuthenticationServiceException("attemptAuthentication error", e2);
+        } catch (ValidateCodeException e3){
+            throw new AuthenticationServiceException("attemptAuthentication error", e3);
         }
         String mobile = obtainMobile(request);
         logger.debug("SmsCodeAuthenticationFilter 从请求中获取mobile:[{}]参数", mobile);

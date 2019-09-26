@@ -9,6 +9,7 @@ import org.spring.security.learn.chapter4.properties.SecurityProperties;
 import org.spring.security.learn.chapter4.consts.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
@@ -87,8 +88,9 @@ public class ValidateAuthCodeService {
                 logger.info("验证码校验通过");
             } catch (ValidateCodeException exception) {
                 logger.error("验证码校验异常", exception);
-                authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, exception);
-                return;
+                throw new AuthenticationServiceException("验证码校验异常 error", exception);
+               // authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, exception);
+               // return;
             }
         }
 
