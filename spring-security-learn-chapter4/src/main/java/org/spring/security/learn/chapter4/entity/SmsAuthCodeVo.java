@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.spring.security.learn.chapter4.properties;
+package org.spring.security.learn.chapter4.entity;
 
 
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.Data;
  * @author .
  */
 @Data
-public class SmsCodeProperties {
+public class SmsAuthCodeVo {
 
     /**
      * 验证码长度.

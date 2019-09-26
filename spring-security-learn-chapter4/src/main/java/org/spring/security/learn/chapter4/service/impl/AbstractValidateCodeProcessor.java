@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.consts.ValidateCodeType;
 import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.service.ValidateCodeGenerator;
 import org.spring.security.learn.chapter4.service.ValidateCodeProcessor;

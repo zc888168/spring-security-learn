@@ -1,21 +1,20 @@
-package org.spring.security.learn.chapter4.filter;
+package org.spring.security.learn.chapter4.service.impl;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
-import org.spring.security.learn.chapter4.properties.ValidateCodeType;
-import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
-import org.springframework.beans.factory.InitializingBean;
+import org.spring.security.learn.chapter4.consts.ValidateCodeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,8 +30,10 @@ import java.util.Set;
  * @author .
  */
 
-@Component("validateCodeFilter")
-public class ValidateCodeOncePerRequestFilter extends OncePerRequestFilter implements InitializingBean {
+@Service
+public class ValidateAuthCodeService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ValidateAuthCodeService.class);
 
     /**
      * 验证码校验失败处理器
@@ -66,33 +67,14 @@ public class ValidateCodeOncePerRequestFilter extends OncePerRequestFilter imple
     /**
      * 初始化要拦截的url配置信息
      */
-    @Override
-    public void afterPropertiesSet() throws ServletException {
-        logger.info("*********afterPropertiesSet**********");
-        super.afterPropertiesSet();
+    @PostConstruct
+    public void init()  {
+
         addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
         //TODO:还可以加图片的地址初始化
 
     }
-
-    /**
-     * 讲系统中配置的需要校验验证码的URL根据校验的类型放入map
-     *
-     * @param urlString
-     * @param type
-     */
-    protected void addUrlToMap(String urlString, ValidateCodeType type) {
-        if (StringUtils.isNotBlank(urlString)) {
-            String[] urls = StringUtils.splitByWholeSeparatorPreserveAllTokens(urlString, ",");
-            for (String url : urls) {
-                urlMap.put(url, type);
-            }
-        }
-    }
-
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    public void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException, ServletException {
 
         logger.info("*********ValidateCodeOncePerRequestFilter-doFilterInternal**********");
 
@@ -110,9 +92,26 @@ public class ValidateCodeOncePerRequestFilter extends OncePerRequestFilter imple
             }
         }
 
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+       // filterChain.doFilter(httpServletRequest, httpServletResponse);
 
     }
+
+    /**
+     * 讲系统中配置的需要校验验证码的URL根据校验的类型放入map
+     *
+     * @param urlString
+     * @param type
+     */
+    private void addUrlToMap(String urlString, ValidateCodeType type) {
+        if (StringUtils.isNotBlank(urlString)) {
+            String[] urls = StringUtils.splitByWholeSeparatorPreserveAllTokens(urlString, ",");
+            for (String url : urls) {
+                urlMap.put(url, type);
+            }
+        }
+    }
+
+
 
     /**
      * 获取校验码的类型，如果当前请求不需要校验，则返回null
