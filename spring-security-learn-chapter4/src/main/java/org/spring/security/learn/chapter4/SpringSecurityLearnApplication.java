@@ -3,6 +3,9 @@ package org.spring.security.learn.chapter4;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author .
+ */
 @SpringBootApplication
 public class SpringSecurityLearnApplication {
 

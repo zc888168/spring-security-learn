@@ -1,9 +1,10 @@
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.security.learn.chapter4.authentication.SmsCodeAuthenticationSecurityConfig;
 import org.spring.security.learn.chapter4.properties.SecurityConstants;
+import org.spring.security.learn.chapter4.validate.ValidateCodeProcessor;
+import org.spring.security.learn.chapter4.validate.ValidateCodeProcessorHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 
 
+/**
+ * @author .
+ */
 @RestController
 public class ValidateCodeController implements Serializable {
 

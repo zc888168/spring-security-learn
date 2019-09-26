@@ -16,7 +16,9 @@ import org.springframework.util.Assert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * @author  zc.
+ */
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	private static final Logger logger = LoggerFactory.getLogger(SmsCodeAuthenticationFilter.class);
 

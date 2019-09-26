@@ -99,7 +99,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
                         .validate(new ServletWebRequest(httpServletRequest, httpServletResponse));
                 logger.info("验证码校验通过");
             } catch (ValidateCodeException exception) {
-                logger.error("验证码校验异常");
+                logger.error("验证码校验异常", exception);
                 authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, exception);
                 return;
             }

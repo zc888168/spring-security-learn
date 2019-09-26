@@ -20,12 +20,6 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
 	private UserDetailsService userDetailsService;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.authentication.AuthenticationProvider#
-	 * authenticate(org.springframework.security.core.Authentication)
-	 */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -49,14 +43,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 		return authenticationResult;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.authentication.AuthenticationProvider#
-	 * supports(java.lang.Class)
-	 *
-	 * AuthenticationManager 判断参数authentication是不是对应的token
-	 */
+
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);

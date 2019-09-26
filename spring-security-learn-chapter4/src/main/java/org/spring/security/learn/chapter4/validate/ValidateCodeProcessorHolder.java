@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 校验码处理器管理器
  *
- *
+ * @author .
  */
 @Component
 public class ValidateCodeProcessorHolder {

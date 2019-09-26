@@ -7,7 +7,7 @@ import org.springframework.security.core.AuthenticationException;
 
 /**
  * AuthenticationException 是 springframework.security提供的，登录过程中所有异常的基类
- *
+ * @author .
  */
 public class ValidateCodeException extends AuthenticationException {
 

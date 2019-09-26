@@ -7,7 +7,9 @@ package org.spring.security.learn.chapter4.validate.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.validate.*;
+import org.spring.security.learn.chapter4.vo.ValidateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -33,14 +35,11 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	 */
 	@Autowired
 	private Map<String, ValidateCodeGenerator> validateCodeGenerators;
-	//imageValidateCodeProcessor
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.whale.security.core.validate.code.ValidateCodeProcessor#create(org.
-	 * springframework.web.context.request.ServletWebRequest)
+	/**
+	 *
+	 * @param request
+	 * @throws Exception
 	 */
 	@Override
 	public void create(ServletWebRequest request) throws Exception {

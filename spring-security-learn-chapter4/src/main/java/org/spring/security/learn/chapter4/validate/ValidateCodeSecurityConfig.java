@@ -12,6 +12,9 @@ import javax.servlet.Filter;
 
 //TODO:这个配置是否可以加到SmsCodeAuthenticationSecurityConfig中??
 
+/**
+ * @author .
+ */
 @Component("validateCodeSecurityConfig")
 public class ValidateCodeSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired

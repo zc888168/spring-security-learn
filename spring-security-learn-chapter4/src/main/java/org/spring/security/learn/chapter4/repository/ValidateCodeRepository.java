@@ -1,10 +1,13 @@
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.repository;
 
+import org.spring.security.learn.chapter4.validate.ValidateCodeType;
+import org.spring.security.learn.chapter4.vo.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
  * 校验码存取器
  * 我们可以根据需要实现不同类型的存取器，比如基于session的，或者直接使用数据库
+ * @author .
  */
 public interface ValidateCodeRepository {
     /**

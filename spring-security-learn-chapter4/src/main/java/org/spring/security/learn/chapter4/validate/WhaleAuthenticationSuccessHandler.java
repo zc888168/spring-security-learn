@@ -24,5 +24,6 @@ public class WhaleAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
                                         Authentication authentication) throws IOException, ServletException {
 
 		logger.info("登录成功");
+		getRedirectStrategy().sendRedirect(request, response, "/user");
 	}
 }

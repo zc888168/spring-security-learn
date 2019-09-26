@@ -8,9 +8,9 @@ my:
         length: 4
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/spring-security-learn-chapter2
+    url: jdbc:mysql://localhost:3306/spring_security_learn_chapter2
     username: root
-    password: 11111111
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     database: mysql

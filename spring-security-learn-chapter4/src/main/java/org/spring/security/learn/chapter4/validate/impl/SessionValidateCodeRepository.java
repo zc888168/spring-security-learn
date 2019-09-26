@@ -1,14 +1,17 @@
 package org.spring.security.learn.chapter4.validate.impl;
 
 
-import org.spring.security.learn.chapter4.validate.ValidateCode;
-import org.spring.security.learn.chapter4.validate.ValidateCodeRepository;
+import org.spring.security.learn.chapter4.vo.ValidateCode;
+import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.validate.ValidateCodeType;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
+/**
+ * @author .
+ */
 @Component
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
 

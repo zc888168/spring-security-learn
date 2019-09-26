@@ -30,7 +30,9 @@ import java.io.IOException;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //datasource的配置是通过配置文件加载过来的
+    /**
+     * datasource的配置是通过配置文件加载过来的
+     */
     @Autowired
     DataSource dataSource;
 
@@ -45,7 +47,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
 
-    //注入BCryptPasswordEncoder，不然会报错
+    /**
+     * 注入BCryptPasswordEncoder，不然会报错
+     * @return
+     */
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -63,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.formLogin().loginPage("/login").defaultSuccessUrl("/user").permitAll()
+        http.formLogin().loginPage("/login").successForwardUrl("/user").permitAll()
                 .and().logout().permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler())
 //                .logoutSuccessUrl("/login")

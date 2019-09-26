@@ -1,6 +1,7 @@
 package org.spring.security.learn.chapter4.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -10,7 +11,10 @@ public class TestController {
 	public String login() {
 		return "login";
 	}
-
+	@RequestMapping("/login/submit")
+	public String submit() {
+		return "index";
+	}
 	
 	@RequestMapping("/")
 	public String index() {
