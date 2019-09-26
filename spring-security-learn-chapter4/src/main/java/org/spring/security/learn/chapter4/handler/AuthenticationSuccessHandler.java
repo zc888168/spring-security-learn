@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component("whaleAuthenticationSuccessHandler")
-public class WhaleAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+/**
+ * @author .
+ */
+@Component("authenticationSuccessHandler")
+public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

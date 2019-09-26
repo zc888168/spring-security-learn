@@ -1,11 +1,9 @@
 package org.spring.security.learn.chapter4.repository.repositoryimpl;
 
 
-import org.spring.security.learn.chapter4.vo.ValidateCode;
-import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.properties.ValidateCodeType;
-import org.springframework.social.connect.web.HttpSessionSessionStrategy;
-import org.springframework.social.connect.web.SessionStrategy;
+import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
+import org.spring.security.learn.chapter4.entity.ValidateCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -20,24 +18,20 @@ public class SessionValidateCodeRepository implements ValidateCodeRepository {
      */
     String SESSION_KEY_PREFIX = "SESSION_KEY_FOR_CODE_";
 
-    /**
-     * 操作session得工具类
-     */
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Override
     public void save(ServletWebRequest request, ValidateCode code, ValidateCodeType validateCodeType) {
-        sessionStrategy.setAttribute(request, getSessionKey(request, validateCodeType), code);
+        request.getRequest().getSession().setAttribute(getSessionKey(request, validateCodeType), code);
     }
 
     @Override
     public ValidateCode get(ServletWebRequest request, ValidateCodeType validateCodeType) {
-        return (ValidateCode) sessionStrategy.getAttribute(request, getSessionKey(request, validateCodeType));
+        return (ValidateCode) request.getRequest().getSession().getAttribute(getSessionKey(request, validateCodeType));
     }
 
     @Override
     public void remove(ServletWebRequest request, ValidateCodeType codeType) {
-        sessionStrategy.removeAttribute(request, getSessionKey(request, codeType));
+        request.getRequest().getSession().removeAttribute(getSessionKey(request, codeType));
     }
 
     /**

@@ -12,7 +12,7 @@ import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
 import org.spring.security.learn.chapter4.service.ValidateCodeGenerator;
 import org.spring.security.learn.chapter4.service.ValidateCodeProcessor;
-import org.spring.security.learn.chapter4.vo.ValidateCode;
+import org.spring.security.learn.chapter4.entity.ValidateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;

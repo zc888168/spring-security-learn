@@ -1,6 +1,8 @@
 package org.spring.security.learn.chapter4.properties;
 
-
+/**
+ * @author .
+ */
 public interface SecurityConstants {
 
     /**
@@ -14,7 +16,7 @@ public interface SecurityConstants {
     String DEFAULT_UNAUTHENTICATION_URL = "/authentication/require";
 
     /**
-     * 默认的用户名密码登录请求处理url
+     * 表单模式，用于自定义表单页面地址
      */
     String DEFAULT_SIGN_IN_PROCESSING_URL_FORM = "/login";
 

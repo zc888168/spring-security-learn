@@ -5,7 +5,6 @@ package org.spring.security.learn.chapter4.authentication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.security.learn.chapter4.security.MyUserDetailsService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;

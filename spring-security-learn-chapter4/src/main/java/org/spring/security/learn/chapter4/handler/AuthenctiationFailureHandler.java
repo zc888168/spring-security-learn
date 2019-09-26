@@ -19,8 +19,8 @@ import java.io.IOException;
  * @author .
  */
 
-@Component("whaleAuthenctiationFailureHandler")
-public class WhaleAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+@Component("authenctiationFailureHandler")
+public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 

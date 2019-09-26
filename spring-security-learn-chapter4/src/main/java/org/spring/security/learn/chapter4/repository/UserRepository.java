@@ -1,18 +1,18 @@
 package org.spring.security.learn.chapter4.repository;
 
 
-import org.spring.security.learn.chapter4.entity.MyUser;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.spring.security.learn.chapter4.entity.Account;
 
 /**
  * @author .
  */
-public interface UserRepository extends JpaRepository<MyUser, Long> {
+public interface UserRepository {
 
     /**
      * findByUsername
+     *
      * @param username
      * @return
      */
-    MyUser findByUsername(String username);
+    Account findByUsername(String username);
 }

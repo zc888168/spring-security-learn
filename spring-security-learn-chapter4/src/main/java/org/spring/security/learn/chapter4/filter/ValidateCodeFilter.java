@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.spring.security.learn.chapter4.exception.ValidateCodeException;
 import org.spring.security.learn.chapter4.properties.SecurityConstants;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
-import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
 import org.spring.security.learn.chapter4.properties.ValidateCodeType;
+import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -25,10 +25,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * InitializingBean 实现此接口中的 afterPropertiesSet 初始化方法在其中初始化图片验证码拦截路径
  * 继承spring中的OncePerRequestFilter，确保每次请求调用一次过滤器
+ *
  * @author .
  */
-//InitializingBean 实现此接口中的 afterPropertiesSet 初始化方法在其中初始化图片验证码拦截路径
 
 @Component("validateCodeFilter")
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {

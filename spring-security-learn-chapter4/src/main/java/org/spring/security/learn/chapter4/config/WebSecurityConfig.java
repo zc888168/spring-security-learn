@@ -1,40 +1,33 @@
 package org.spring.security.learn.chapter4.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.properties.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 
+/**
+ * WebSecurityConfig
+ *
+ * @author .
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * datasource的配置是通过配置文件加载过来的
-     */
-    @Autowired
-    DataSource dataSource;
+    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-    @Qualifier("myUserDetailsService")
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
@@ -43,31 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 
 
-    /**
-     * 注入BCryptPasswordEncoder，不然会报错
-     * @return
-     */
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    PersistentTokenRepository persistentTokenRepository(){
-
-        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
-        jdbcTokenRepository.setDataSource(dataSource);
-        return jdbcTokenRepository;
-    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.formLogin().loginPage("/login").successForwardUrl("/user").permitAll()
                 .and().logout().permitAll()
                 .logoutSuccessHandler(logoutSuccessHandler())
-//                .logoutSuccessUrl("/login")
                 .deleteCookies("remember-me")
                 .and()
                 .apply(validateCodeSecurityConfig)
@@ -84,11 +58,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    LogoutSuccessHandler logoutSuccessHandler(){
-        return  new LogoutSuccessHandler() {
+    LogoutSuccessHandler logoutSuccessHandler() {
+        return new LogoutSuccessHandler() {
             @Override
             public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                System.out.println("你退出了登录");
+                logger.debug("你退出了登录");
                 httpServletResponse.sendRedirect("/login");
             }
         };

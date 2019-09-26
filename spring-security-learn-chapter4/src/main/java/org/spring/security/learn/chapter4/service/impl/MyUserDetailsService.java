@@ -1,6 +1,6 @@
-package org.spring.security.learn.chapter4.security;
+package org.spring.security.learn.chapter4.service.impl;
 
-import org.spring.security.learn.chapter4.entity.MyUser;
+import org.spring.security.learn.chapter4.entity.Account;
 import org.spring.security.learn.chapter4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +27,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        MyUser user = userRepository.findByUsername(name);
+        Account user = userRepository.findByUsername(name);
         if (user == null) {
             throw new UsernameNotFoundException(name);
         }

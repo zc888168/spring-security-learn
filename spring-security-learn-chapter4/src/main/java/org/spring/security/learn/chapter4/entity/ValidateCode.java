@@ -1,4 +1,4 @@
-package org.spring.security.learn.chapter4.vo;
+package org.spring.security.learn.chapter4.entity;
 
 import lombok.Data;
 

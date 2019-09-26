@@ -1,6 +1,6 @@
 package org.spring.security.learn.chapter4.service;
 
-import org.spring.security.learn.chapter4.vo.ValidateCode;
+import org.spring.security.learn.chapter4.entity.ValidateCode;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
