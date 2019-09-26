@@ -28,9 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-
-    @Autowired
-    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+//
+//    @Autowired
+//    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
@@ -46,8 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(validateCodeSecurityConfig)
                 .and()
-                .apply(smsCodeAuthenticationSecurityConfig)
-                .and()
+               // .apply(smsCodeAuthenticationSecurityConfig)
+                //.and()
                 .authorizeRequests().antMatchers("/code/sms",
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM,
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE).permitAll()

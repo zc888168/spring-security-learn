@@ -26,6 +26,11 @@ public interface SecurityConstants {
     String DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE = "/login/submit";
 
     /**
+     * 需要短信验证码校验的url 支持ant语法
+     */
+    public static final String NEED_SMS_CODE_AUTHENTICATION_URL = "/login/submit";
+
+    /**
      * 默认的手机验证码登录请求处理url
      */
     String DEFAULT_SIGN_IN_URL_MOBILE_PAGE = "/authentication/mobilePage";

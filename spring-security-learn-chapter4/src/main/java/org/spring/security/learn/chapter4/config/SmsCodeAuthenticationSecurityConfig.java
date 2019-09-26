@@ -22,16 +22,16 @@ import org.springframework.stereotype.Component;
 /**
  * @author zc.
  */
-@Component
+//@Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
 	private static final Logger logger = LoggerFactory.getLogger(SmsCodeAuthenticationSecurityConfig.class);
 	
 	@Autowired
-	private AuthenticationSuccessHandler whaleAuthenticationSuccessHandler;
+	private AuthenticationSuccessHandler authenticationSuccessHandler;
 	
 	@Autowired
-	private AuthenticationFailureHandler whaleAuthenticationFailureHandler;
+	private AuthenticationFailureHandler authenticationFailureHandler;
 
 	@Qualifier("myUserDetailsService")
 	@Autowired
@@ -46,8 +46,8 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 		SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
 		smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
 
-		smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(whaleAuthenticationSuccessHandler);
-		smsCodeAuthenticationFilter.setAuthenticationFailureHandler(whaleAuthenticationFailureHandler);
+		smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
+		smsCodeAuthenticationFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
 		
 		SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
 		smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);

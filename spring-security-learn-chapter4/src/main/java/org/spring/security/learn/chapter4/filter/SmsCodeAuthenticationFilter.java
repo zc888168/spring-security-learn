@@ -30,6 +30,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
      */
     private boolean postOnly = true;
 
+
     // ~ Constructors
     // ===================================================================================================
 
@@ -38,7 +39,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
      * 一个路径匹配器  手机表单登录的一个请求
      */
     public SmsCodeAuthenticationFilter() {
-        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE, HttpMethod.POST.name()));
+        super(new AntPathRequestMatcher(SecurityConstants.NEED_SMS_CODE_AUTHENTICATION_URL, HttpMethod.POST.name()));
 
     }
 
@@ -119,5 +120,4 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
     public final String getMobileParameter() {
         return mobileParameter;
     }
-
 }

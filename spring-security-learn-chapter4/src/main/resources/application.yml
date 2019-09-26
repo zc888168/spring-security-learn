@@ -1,13 +1,13 @@
 server:
   port: 9090
 
-my:
+spring:
   security:
     code:
       sms:
-        #验证码 长度6位
+        #验证码 长度6位 default 6位
         length: 6
-        #验证码 有效时间300s 5分钟
+        #验证码 有效时间300s 5分钟 default 1min
         expireIn: 300
         # 需要开启短信验证码的url
         url: "/login/submit"
