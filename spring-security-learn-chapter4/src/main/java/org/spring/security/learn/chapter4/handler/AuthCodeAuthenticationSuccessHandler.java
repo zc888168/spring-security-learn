@@ -24,7 +24,7 @@ public class AuthCodeAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
 
 		logger.info("登录成功");
 		getRedirectStrategy().sendRedirect(request, response, "/user");

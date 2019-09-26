@@ -16,8 +16,10 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author zc.
@@ -57,7 +59,13 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
             //当前请求如果不是post请求则抛出异常
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
-        //
+        try {
+            validateAuthCodeService.doFilterInternal(request, response);
+        } catch (IOException e) {
+            throw new AuthenticationServiceException("attemptAuthentication error", e);
+        } catch (ServletException e) {
+            throw new AuthenticationServiceException("attemptAuthentication error", e);
+        }
         String mobile = obtainMobile(request);
         logger.debug("SmsCodeAuthenticationFilter 从请求中获取mobile:[{}]参数", mobile);
 

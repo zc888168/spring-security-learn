@@ -28,12 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-//
-//    @Autowired
-//    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
     @Autowired
-    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
 
 
     @Override
@@ -44,16 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler())
                 .deleteCookies("remember-me")
                 .and()
-                .apply(validateCodeSecurityConfig)
-                .and()
-               // .apply(smsCodeAuthenticationSecurityConfig)
-                //.and()
-                .authorizeRequests().antMatchers("/code/sms",
+                .authorizeRequests().antMatchers("/code/sms", "/login",
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM,
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
+        http.apply(smsCodeAuthenticationSecurityConfig);
 
     }
 
