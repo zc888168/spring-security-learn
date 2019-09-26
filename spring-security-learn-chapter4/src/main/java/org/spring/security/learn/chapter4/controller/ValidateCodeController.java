@@ -39,6 +39,7 @@ public class ValidateCodeController implements Serializable {
     @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type)
             throws Exception {
+        //todo 验证短信或邮件每个会话在1分钟内只能发送2条，并且必须在服务端做限制
         logger.info("***********createCode**********");
         validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
     }
