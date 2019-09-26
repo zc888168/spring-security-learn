@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.spring.security.learn.chapter4.authentication;
 
@@ -14,46 +14,50 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
+/**
+ * @author .
+ */
 public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
-	private static final Logger logger = LoggerFactory.getLogger(SmsCodeAuthenticationProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(SmsCodeAuthenticationProvider.class);
 
-	private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
-	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		logger.info("**********SmsCodeAuthenticationProvider-authenticate*********");
+        logger.info("**********SmsCodeAuthenticationProvider-authenticate*********");
 
-		SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+        SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+        //token中的手机号
+        String principal = (String) authenticationToken.getPrincipal();
+        logger.info("principal:{}", principal);
+        //根据手机号拿到对应的UserDetails
+        UserDetails user = userDetailsService.loadUserByUsername(principal);
 
-		String principal = (String) authenticationToken.getPrincipal();//token中的手机号
-		logger.info("principal:{}", principal);
-		UserDetails user = userDetailsService.loadUserByUsername(principal);//根据手机号拿到对应的UserDetails
+        if (user == null) {
+            logger.error("数据库无法获取用户信息");
+            throw new InternalAuthenticationServiceException("无法获取用户信息");
+        }
 
-		if (user == null) {
-			logger.error("数据库无法获取用户信息");
-			throw new InternalAuthenticationServiceException("无法获取用户信息");
-		}
-		
-		SmsCodeAuthenticationToken authenticationResult = new SmsCodeAuthenticationToken(user, user.getAuthorities());
-		
-		authenticationResult.setDetails(authenticationToken.getDetails());
+        SmsCodeAuthenticationToken authenticationResult = new SmsCodeAuthenticationToken(user, user.getAuthorities());
 
-		return authenticationResult;
-	}
+        authenticationResult.setDetails(authenticationToken.getDetails());
+
+        return authenticationResult;
+    }
 
 
-	@Override
-	public boolean supports(Class<?> authentication) {
-		return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
-	}
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
+    }
 
-	public UserDetailsService getUserDetailsService() {
-		return userDetailsService;
-	}
+    public UserDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
 
-	public void setUserDetailsService(UserDetailsService userDetailsService) {
-		this.userDetailsService = userDetailsService;
-	}
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 }

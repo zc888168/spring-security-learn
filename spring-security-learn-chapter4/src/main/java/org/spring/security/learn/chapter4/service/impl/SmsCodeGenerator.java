@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.validate.sms;
+package org.spring.security.learn.chapter4.service.impl;
 
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
 import org.spring.security.learn.chapter4.vo.ValidateCode;
-import org.spring.security.learn.chapter4.validate.ValidateCodeGenerator;
+import org.spring.security.learn.chapter4.service.ValidateCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;

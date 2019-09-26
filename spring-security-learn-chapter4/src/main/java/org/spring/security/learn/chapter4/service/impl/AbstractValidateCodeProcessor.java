@@ -1,14 +1,17 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.validate.impl;
+package org.spring.security.learn.chapter4.service.impl;
 
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spring.security.learn.chapter4.exception.ValidateCodeException;
+import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
-import org.spring.security.learn.chapter4.validate.*;
+import org.spring.security.learn.chapter4.service.ValidateCodeGenerator;
+import org.spring.security.learn.chapter4.service.ValidateCodeProcessor;
 import org.spring.security.learn.chapter4.vo.ValidateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -17,6 +20,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Map;
 
+/**
+ * @author .
+ * @param <C>
+ */
 public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> implements ValidateCodeProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(AbstractValidateCodeProcessor.class);
@@ -44,9 +51,12 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	@Override
 	public void create(ServletWebRequest request) throws Exception {
 		logger.info("**********AbstractValidateCodeProcessor-create**************");
-		C validateCode = generate(request);//生成
-		save(request, validateCode);//保存
-		send(request, validateCode);//发送 这是一个抽象方法 需要子类去实现
+		//生成
+		C validateCode = generate(request);
+		//保存
+		save(request, validateCode);
+		//发送 这是一个抽象方法 需要子类去实现
+		send(request, validateCode);
 	}
 
 	/**
@@ -107,7 +117,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Override
     public void validate(ServletWebRequest request) {
 
-    	logger.info("***********AbstractValidateCodeProcessor--validate**********");
+    	logger.info("***********AbstractValidateCodeProcessor--handler**********");
 
 		ValidateCodeType codeType = getValidateCodeType(request);
 		logger.info("codeType:{}", codeType.getParamNameOnValidate());

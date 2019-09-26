@@ -1,9 +1,12 @@
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.filter;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.spring.security.learn.chapter4.exception.ValidateCodeException;
 import org.spring.security.learn.chapter4.properties.SecurityConstants;
 import org.spring.security.learn.chapter4.properties.SecurityProperties;
+import org.spring.security.learn.chapter4.service.impl.ValidateCodeProcessorHolder;
+import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -23,6 +26,7 @@ import java.util.Set;
 
 /**
  * 继承spring中的OncePerRequestFilter，确保每次请求调用一次过滤器
+ * @author .
  */
 //InitializingBean 实现此接口中的 afterPropertiesSet 初始化方法在其中初始化图片验证码拦截路径
 
@@ -38,12 +42,13 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     /**
      * 系统配置信息
      */
-    //配置
     @Autowired
     private SecurityProperties securityProperties;
 
-//    验证请求url与配置的url是否匹配的工具类
-    //路径正则匹配工具
+    /**
+     * 验证请求url与配置的url是否匹配的工具类
+     * 路径正则匹配工具
+     */
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
     /**
@@ -70,6 +75,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         //TODO:还可以加图片的地址初始化
 
     }
+
     /**
      * 讲系统中配置的需要校验验证码的URL根据校验的类型放入map
      *

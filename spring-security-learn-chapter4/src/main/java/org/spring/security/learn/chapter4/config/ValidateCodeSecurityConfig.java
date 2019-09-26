@@ -1,4 +1,4 @@
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

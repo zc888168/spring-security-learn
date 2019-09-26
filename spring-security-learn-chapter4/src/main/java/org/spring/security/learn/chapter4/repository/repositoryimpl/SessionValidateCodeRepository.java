@@ -1,9 +1,9 @@
-package org.spring.security.learn.chapter4.validate.impl;
+package org.spring.security.learn.chapter4.repository.repositoryimpl;
 
 
 import org.spring.security.learn.chapter4.vo.ValidateCode;
 import org.spring.security.learn.chapter4.repository.ValidateCodeRepository;
-import org.spring.security.learn.chapter4.validate.ValidateCodeType;
+import org.spring.security.learn.chapter4.properties.ValidateCodeType;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.stereotype.Component;

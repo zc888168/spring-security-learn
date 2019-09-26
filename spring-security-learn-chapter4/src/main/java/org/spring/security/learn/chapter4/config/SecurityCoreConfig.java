@@ -1,8 +1,9 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.properties;
+package org.spring.security.learn.chapter4.config;
 
+import org.spring.security.learn.chapter4.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 

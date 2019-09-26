@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

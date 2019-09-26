@@ -1,10 +1,12 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.authentication;
+package org.spring.security.learn.chapter4.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spring.security.learn.chapter4.authentication.SmsCodeAuthenticationProvider;
+import org.spring.security.learn.chapter4.filter.SmsCodeAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;

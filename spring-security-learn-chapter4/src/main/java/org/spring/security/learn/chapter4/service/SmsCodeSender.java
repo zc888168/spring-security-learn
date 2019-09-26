@@ -1,4 +1,4 @@
-package org.spring.security.learn.chapter4.validate.sms;
+package org.spring.security.learn.chapter4.service;
 
 /**
  * 短信验证码发送接口

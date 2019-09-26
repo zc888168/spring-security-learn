@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

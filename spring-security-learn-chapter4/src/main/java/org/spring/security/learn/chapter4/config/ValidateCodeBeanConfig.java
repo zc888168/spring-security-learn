@@ -1,8 +1,8 @@
-package org.spring.security.learn.chapter4.validate;
+package org.spring.security.learn.chapter4.config;
 
 
-import org.spring.security.learn.chapter4.validate.sms.DefaultSmsCodeSender;
-import org.spring.security.learn.chapter4.validate.sms.SmsCodeSender;
+import org.spring.security.learn.chapter4.service.impl.DefaultSmsCodeSender;
+import org.spring.security.learn.chapter4.service.SmsCodeSender;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
