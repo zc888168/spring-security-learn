@@ -50,7 +50,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	 */
 	@Override
 	public void create(ServletWebRequest request) throws Exception {
-		logger.info("**********AbstractValidateCodeProcessor-create**************");
+		logger.debug("**********AbstractValidateCodeProcessor-create**************");
 		//生成
 		C validateCode = generate(request);
 		//保存
@@ -69,7 +69,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	private C generate(ServletWebRequest request) {
         String type = getValidateCodeType(request).toString().toLowerCase();
         String generatorName = type + "CodeGenerator";
-        logger.info("AbstractValidateCodeProcessor-generatorName:{}",generatorName);
+        logger.debug("AbstractValidateCodeProcessor-generatorName:{}",generatorName);
 
         ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(generatorName);
 		if (validateCodeGenerator == null) {
@@ -85,7 +85,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	 * @param validateCode
 	 */
 	private void save(ServletWebRequest request, C validateCode) {
-		logger.info("AbstractValidateCodeProcessor-save");
+		logger.debug("AbstractValidateCodeProcessor-save");
 		ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
 		validateCodeRepository.save(request, code, getValidateCodeType(request));
 
@@ -117,7 +117,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Override
     public void validate(ServletWebRequest request) {
 
-    	logger.info("***********AbstractValidateCodeProcessor--handler**********");
+    	logger.debug("***********AbstractValidateCodeProcessor--handler**********");
 
 		ValidateCodeType codeType = getValidateCodeType(request);
 		logger.info("codeType:{}", codeType.getParamNameOnValidate());

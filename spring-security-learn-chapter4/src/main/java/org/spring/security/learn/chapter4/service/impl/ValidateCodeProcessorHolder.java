@@ -29,12 +29,12 @@ public class ValidateCodeProcessorHolder {
 
     public ValidateCodeProcessor findValidateCodeProcessor(String type) {
         String name = type.toLowerCase() + ValidateCodeProcessor.class.getSimpleName();
-        logger.info("ValidateCodeProcessorHolder-findValidateCodeProcessor-name:{}", name);
+        logger.debug("ValidateCodeProcessorHolder-findValidateCodeProcessor-name:{}", name);
         ValidateCodeProcessor processor = validateCodeProcessors.get(name);
         if (processor == null) {
             throw new ValidateCodeException("验证码处理器" + name + "不存在");
         }
-        logger.info("获取到验证码处理器");
+        logger.debug("获取到验证码处理器");
         return processor;
     }
 }
