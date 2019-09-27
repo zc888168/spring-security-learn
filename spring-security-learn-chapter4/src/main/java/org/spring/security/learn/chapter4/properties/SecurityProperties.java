@@ -22,4 +22,14 @@ public class SecurityProperties {
      */
     private ValidateAuthCodeVo code = new ValidateAuthCodeVo();
 
+    /**
+     * session auth code 时间间隔(有效期)
+     */
+    private int sessionAuthCodeTimeInterval;
+
+    /**
+     * session auth code 次数限制
+     */
+    private int sessionAuthCodeLimitNum;
+
 }

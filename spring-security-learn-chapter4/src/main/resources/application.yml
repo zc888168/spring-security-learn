@@ -13,3 +13,7 @@ spring:
         expireIn: 300
         # 需要开启短信验证码的url
         url: "/login/submit"
+    #session 时间间隔
+    sessionAuthCodeTimeInterval: 1
+    #session次数限制
+    sessionAuthCodeLimitNum: 2

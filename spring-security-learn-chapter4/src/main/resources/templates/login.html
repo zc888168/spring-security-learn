@@ -13,7 +13,11 @@
                 async:false,
                 dataType:"html",
                 success:function(msg){
-                    console.log("success")
+                    console.log(msg)
+                    if("failure" == msg) {
+                       alert("frequencycontrol Send frequently, please try again later");
+                    }
+
                 }
             });
 
